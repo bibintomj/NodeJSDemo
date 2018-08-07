@@ -1,0 +1,12 @@
+Install
+  a. node
+  b. npm
+
+  Steps
+
+1. Configure Git Local Repo
+2. In terminal, navigate to repo directory.
+3.  'npm init'
+        & enter necessary values
+4.  'npm install express --save'
+        This will install dependancy. Package.json will be updated.
