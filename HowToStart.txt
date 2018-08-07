@@ -8,5 +8,8 @@ Install
 2. In terminal, navigate to repo directory.
 3.  'npm init'
         & enter necessary values
-4.  'npm install express --save'
+4. Configure .gitignore for node
+5.  'npm install express --save'
         This will install dependancy. Package.json will be updated.
+6. initial commit to repo
+7.
