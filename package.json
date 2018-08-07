@@ -16,7 +16,5 @@
     "url": "https://github.com/bibintomj/NodeJSDemo/issues"
   },
   "homepage": "https://github.com/bibintomj/NodeJSDemo#readme",
-  "dependencies": {
-    "express": "^4.16.3"
-  }
+
 }
