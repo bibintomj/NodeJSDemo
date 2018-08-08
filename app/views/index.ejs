@@ -1,7 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>ABCD </head>
-<body>
+<head>
+  <title>TEST APPLICATION | v1</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+<link rel='stylesheet' href='/css/style.css' />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<link href='https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h1 class="registration-form-title">Join Apple Developer Program</h1>
+        <form class="registration-form">
+          <div class="form-group">
+            <label for="registration-form-name">Name</label>
+            <input type="text" class="form-control" id="registration-form-name" placeholder="Tony Stark   or    T'Challa ...">
+          </div>
+
+          <div class="form-group">
+            <label for="registration-form-appleid">Apple ID</label>
+            <input type="text" class="form-control" id="registration-form-appleid" placeholder="johnive@apple.com">
+          </div>
+
+          <div class="form-group">
+              <label for="registration-form-message">Message</label>
+              <textarea type="text" placeholder="Enter your message, then hit submit"  class="form-control" id="registration-form-message" rows="6"></textarea>
+          </div>
+          <button type="submit" class="btn btn-default pull-right">Join Now</button>
+        </form>
+      </div><!-- primary -->
+    </div>
+  </div><!-- container -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <script src="/reload/reload.js"></script>
+  <script src="/js/registration.js"></script>
 </body>
 </html>

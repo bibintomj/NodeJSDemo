@@ -10,6 +10,20 @@ Install
         & enter necessary values
 4. Configure .gitignore for node
 5.  'npm install express --save'
-        This will install dependancy. Package.json will be updated.
+    'npm install reload --save'
+    'npm install ejs --save'
+        These will install dependancy. Package.json will be updated.
 6. initial commit to repo
-7.
+
+Folder Structure
+
+Application Name
+        -app(dir)
+                -public(dir)
+                        -css(dir)
+                        -js(dir)
+                -routes(dir)
+                -views(dir)
+                -app.js(file)
+        -node_modules(dir)
+        -package.json(file)

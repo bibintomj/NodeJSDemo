@@ -9,7 +9,7 @@ app.set('views', 'app/views')
 app.use(express.static('app/public'))
 app.use(require('./routes/index'))
 
-app.listen(app.get('port'), function () {
+let server = app.listen(app.get('port'), function () {
   console.log('Listening on port ' + app.get('port'))
 })
 
