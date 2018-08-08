@@ -1,0 +1,17 @@
+<article class="userlist jumbotron hidden-xs"></article>
+<div class="container">
+  <div class="row">
+    <ul>
+      <% users.forEach(item => { %>
+        <li>
+          <strong><%- item.name %></strong>
+          <mark><%- item.appleID %></mark><br>
+          <em><%- item.message %></em>
+          <br><br>
+        </li>
+      <% }) %>
+    </ul>
+
+  </div><!-- row -->
+</div><!-- container -->
+</article>
