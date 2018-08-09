@@ -1,12 +1,13 @@
-<article class="userlist jumbotron hidden-xs"></article>
 <div class="container">
   <div class="row">
-    <ul>
+    <ul class = "users-list">
       <% users.forEach(item => { %>
         <li>
           <strong><%- item.name %></strong>
-          <mark><%- item.appleID %></mark><br>
-          <em><%- item.message %></em>
+          <mark><%- item.appleID %></mark>
+          <button class="registration-edit btn btn-sm btn-danger" style='float: right'><span id="<%- item.id %>" class="glyphicon glyphicon-remove"></span></button>
+          <button class="registration-delete btn btn-sm btn-primary" style='float: right'><span id="item.id" class="glyphicon glyphicon-pencil"></span></button>
+          <br/><em><%- item.message %></em>
           <br><br>
         </li>
       <% }) %>

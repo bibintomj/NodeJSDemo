@@ -29,7 +29,6 @@ const User = ormObj.define('users', {
   },
   appleID: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: true
   },
   message: {
@@ -46,13 +45,17 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-  User.count().then(count => {
+console.log('Tapped Join')
+
+  User.max('id').then(id => {
+    console.log('Max ID', id)
     User.create({
-      id: count + 1,
+      id: id + 1,
       name: req.body.name,
       appleID: req.body.appleid,
       message: req.body.message
     }).then(insertRes => {
+      console.log('Inserted')
       res.end()
       // res.redirect('/users')
     }).catch(err => {
@@ -69,6 +72,19 @@ router.post('/', (req, res) => {
 
 router.get('/user/:id', (req, res) => {
   User.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(result => {
+    res.json(result)
+  })
+})
+
+router.delete('/users/:id', (req, res) => {
+  console.log('Deletting', req.params.id)
+
+  // res.json({status: true})
+  User.destroy({
     where: {
       id: req.params.id
     }

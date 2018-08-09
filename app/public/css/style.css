@@ -204,3 +204,10 @@ header .navbar-inverse .navbar-nav>li>a {
   border-bottom: none;
 }
 
+.registration-delete {
+  margin: 10px;
+}
+
+.registration-edit {
+  margin: 10px;
+}
