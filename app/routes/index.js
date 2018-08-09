@@ -1,16 +1,44 @@
 const express = require('express')
-const mysql = require('mysql')
-const router = express.Router()
 const bodyParser = require('body-parser')
+const Sequelize = require('sequelize')
+const router = express.Router()
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: false }))
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Pass@123',
-  database: 'AppleDatabase'
+const ormObj = new Sequelize(
+  'AppleDatabase',
+  'root',
+  'Pass@123', {
+    dialect: 'mysql',
+    logging: false
+  }
+)
+
+const User = ormObj.define('users', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
+    unique: true
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  appleID: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: true
+  },
+  message: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
+}, {
+  freezeTableName: true,
+  timestamps: false
 })
 
 router.get('/', (req, res) => {
@@ -18,54 +46,40 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-
-  const countQuery = 'SELECT count(*) AS count from users'
-
-  const query = 'INSERT into users values (?,?,?,?)'
-
-  connection.query(countQuery, (err, countData, fields) => {
-    if (err) {
-      console.log('Failed to fetch count' + err)
-      res.sendStatus(500)
-      return
-    }
-    res.end()
-
-    const id = countData[0].count + 1
-    connection.query(query, [id, req.body.name, req.body.appleid, req.body.message], (err, rows, fields) => {
-      if (err) {
-        console.log('Failed to fetch' + err)
-        res.sendStatus(500)
-        return
-      }
+  User.count().then(count => {
+    User.create({
+      id: count + 1,
+      name: req.body.name,
+      appleID: req.body.appleid,
+      message: req.body.message
+    }).then(insertRes => {
       res.end()
+      // res.redirect('/users')
+    }).catch(err => {
+      if (err) {
+        console.log('Failed to insert: ' + err.stack)
+      }
     })
+  }).catch(err => {
+    if (err) {
+      console.log('Failed Count: ' + err)
+    }
   })
-
 })
 
 router.get('/user/:id', (req, res) => {
-  const query = 'SELECT * from users where id = ?'
-  connection.query(query, [req.params.id], (err, rows, fields) => {
-    if (err) {
-      console.log('Failed to fetch' + err)
-      res.sendStatus(500)
-      return
+  User.findOne({
+    where: {
+      id: req.params.id
     }
-    res.json(rows)
+  }).then(result => {
+    res.json(result)
   })
 })
 
 router.get('/users', (req, res) => {
-  const query = 'Select * from users'
-
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.log('Failed to fetch' + err)
-      res.sendStatus(500)
-      return
-    }
-    res.render('users', {'users': rows})
+  User.findAll().then(result => {
+    res.render('users', {'users': result.reverse()})
   })
 })
 
