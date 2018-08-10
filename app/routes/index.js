@@ -41,34 +41,82 @@ const User = ormObj.define('users', {
 })
 
 router.get('/', (req, res) => {
-  res.render('index', {})
-})
-
-router.post('/', (req, res) => {
-console.log('Tapped Join')
-
-  User.max('id').then(id => {
-    console.log('Max ID', id)
-    User.create({
-      id: id + 1,
-      name: req.body.name,
-      appleID: req.body.appleid,
-      message: req.body.message
-    }).then(insertRes => {
-      console.log('Inserted')
-      res.end()
-      // res.redirect('/users')
-    }).catch(err => {
-      if (err) {
-        console.log('Failed to insert: ' + err.stack)
-      }
-    })
-  }).catch(err => {
-    if (err) {
-      console.log('Failed Count: ' + err)
+  res.render('index', {
+    pageTitle: 'Join Apple Developer Program',
+    user: {
+      id: null,
+      name: "",
+      appleID: "",
+      message: ""
     }
   })
 })
+
+router.get('/edit/:id', (req, res) => {
+  User.findOne({
+    where: {
+      id: req.params.id
+    }
+  }).then(result => {
+    res.render('index', {
+      pageTitle: 'Update your details',
+      user: {
+        id: result.id,
+        name: result.name,
+        appleID: result.appleID,
+        message: result.message
+      }
+    })
+  })
+})
+
+router.post('/', (req, res) => {
+
+  console.log('Updating:', req.body.id)
+  if (req.body.id) {
+    console.log('inside IF')
+
+    insert({
+      id: parseInt(req.body.id),
+      name: req.body.name,
+      appleID: req.body.appleid,
+      message: req.body.message
+    }, res)
+  } else {
+    User.max('id').then(id => {
+      console.log('Max ID', id)
+      insert({
+        id: id + 1,
+        name: req.body.name,
+        appleID: req.body.appleid,
+        message: req.body.message
+      }, res)
+    }).catch(err => {
+      if (err) {
+        console.log('Failed Count: ' + err)
+      }
+    })
+  }
+})
+
+function insert(user, res) {
+      console.log(user.id)
+  User.insertOrUpdate(user).then(insertRes => {
+    console.log('Inserted')
+    res.end()
+    // res.redirect('/users')
+  }).catch(err => {
+    if (err) {
+      console.log('Failed to insert: ' + err.stack)
+    }
+  })
+}
+
+// func update(user, res) {
+//   User.
+// }
+
+
 
 router.get('/user/:id', (req, res) => {
   User.findOne({

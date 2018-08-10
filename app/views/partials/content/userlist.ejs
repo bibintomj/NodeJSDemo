@@ -6,13 +6,12 @@
           <strong><%- item.name %></strong>
           <mark><%- item.appleID %></mark>
           <button class="registration-edit btn btn-sm btn-danger" style='float: right'><span id="<%- item.id %>" class="glyphicon glyphicon-remove"></span></button>
-          <button class="registration-delete btn btn-sm btn-primary" style='float: right'><span id="item.id" class="glyphicon glyphicon-pencil"></span></button>
+          <button class="registration-delete btn btn-sm btn-primary" style='float: right'><span id="<%- item.id %>" class="glyphicon glyphicon-pencil"></span></button>
           <br/><em><%- item.message %></em>
           <br><br>
         </li>
       <% }) %>
     </ul>
-
   </div><!-- row -->
 </div><!-- container -->
 </article>

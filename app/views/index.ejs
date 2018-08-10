@@ -12,24 +12,24 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-12">
-        <h1 class="registration-form-title">Join Apple Developer Program</h1>
+        <h1 class="registration-form-title"><%- pageTitle %></h1>
         <h4><a href="/users" class="pull-right">All Users</a></h4>
-        <form class="registration-form">
+        <form class="registration-form" userid="<%- user.id %>">
           <div class="form-group">
             <label for="registration-form-name">Name</label>
-            <input type="text" class="form-control" id="registration-form-name" placeholder="Tony Stark   or    T'Challa ...">
+            <input type="text" class="form-control" id="registration-form-name" placeholder="Tony Stark   or    T'Challa ..." value="<%- user.name %>">
           </div>
 
           <div class="form-group">
             <label for="registration-form-appleid">Apple ID</label>
-            <input type="text" class="form-control" id="registration-form-appleid" placeholder="johnive@apple.com">
+            <input type="text" class="form-control" id="registration-form-appleid" placeholder="johnive@apple.com" value="<%- user.appleID %>">
           </div>
 
           <div class="form-group">
               <label for="registration-form-message">Message</label>
-              <textarea type="text" placeholder="Enter your message, then hit submit"  class="form-control" id="registration-form-message" rows="6"></textarea>
+              <textarea type="text" placeholder="Enter your message, then hit submit"  class="form-control" id="registration-form-message" rows="6"><%- user.message %></textarea>
           </div>
-          <button type="submit" class="btn btn-default pull-right">Join Now</button>
+          <button type="submit" class="btn btn-default pull-right">Submit</button>
         </form>
       </div><!-- primary -->
     </div>

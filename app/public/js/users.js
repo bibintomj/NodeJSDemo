@@ -1,17 +1,24 @@
 $(function () {
   $('.users-list').on('click', function (e) {
     if (e.target.className == 'glyphicon glyphicon-remove') {
-      console.log('WILL PROMPT')
       if (confirm('Are you sure you want to delete this?')) {
         $.ajax({
           url: '/users/' + e.target.id,
           type: 'DELETE',
-          success: refresh
+          success: removeCallback
         }) //ajax
       }
     } // the target is a delete button
+    else if (e.target.className == 'glyphicon glyphicon-pencil') {
+        window.location = '/edit/' + e.target.id
+      }
 }); //feedback messages
-  function refresh(data) {
+
+  function removeCallback(data) {
+    window.location = '/users'
+  }
+
+  function editCallback(data) {
     window.location = '/users'
   }
 })
